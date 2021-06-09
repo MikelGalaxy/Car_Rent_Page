@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Car } from '../../types/car';
-import { CARS } from '../../mock-data/car-mock';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'app-car-browse',
@@ -9,11 +9,12 @@ import { CARS } from '../../mock-data/car-mock';
 })
 export class CarBrowseComponent implements OnInit {
 
-  cars: Car[] = CARS;
+  cars: Car[] = [];
 
-  constructor() { }
+  constructor(private carService: CarService) { }
 
   ngOnInit(): void {
+    this.carService.getAllCars().subscribe((cars) => this.cars = cars);
   }
 
 }
